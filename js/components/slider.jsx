@@ -14,27 +14,27 @@ export default class Fade extends React.Component {
             autoplay: true,
             autoplaySpeed: 2000,
             centerMode: true,
-            centerPadding: '100px'
+            centerPadding: '100px',
+
+
         };
         return (
-            <div>
-                <h2>Moon Gallery</h2>
+            <div id='slider' >
+                <br />
                 <Slider {...settings}>
                     {this.props.images.map(image=>(
-                        <div key={image} >
-                            <div style={{
+                        <div className='slider-image' key={image} >
+                            <div  style={{
                                 backgroundImage: `url('${image}')`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center center',
-                                width: '1000px',
-                                height: '500px',
-                                margin: '0 auto'
+                                width: '100%',
+                                height: '750px',
+                                margin: '0 auto',
                             }}>
                             </div>
                         </div>
                     ))}
-
-
                 </Slider>
             </div>
         );

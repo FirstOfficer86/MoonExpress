@@ -5,10 +5,14 @@ import Nav from './components/nav.jsx';
 import HomePage from './components/home.jsx';
 import MoonTable from './components/moons.jsx';
 import Fade from './components/slider.jsx';
+import SpaceVideo from './components/video.jsx';
+import Footer from './components/footer.jsx';
 
-const biggestMoons = ["PIA00502","PIA00318","ARC-1979-AC79-7083","PIA00457","PIA02145","PIA01536"];
+import '../scss/main.scss';
 
-const galleryImages = ["PIA21390","PIA00405","PIA06594","PIA10748","PIA15280","7031833"];
+const biggestMoons = ["PIA19048","JPL-2015_10_28-PIA17202","PIA00716","PIA00457","PIA02145","PIA01536"];
+
+const galleryImages = ["as11-40-5902","as11-44-6551","PIA17474","0102627","9019795","7031833","PIA00130"," as11-40-5874","hubble-captures-vivid-auroras-in-jupiters-atmosphere_28000029525_o"];
 
 class App extends React.Component {
     constructor(props){
@@ -62,18 +66,19 @@ class App extends React.Component {
             <div className='container'>
                 <Nav />
                 <HomePage/>
-                <Grid columns={2} divided>
+                <Grid id='main-div-moons' stackable columns={2} divided>
                     <Grid.Row>
-                        <Grid.Column>
-                            <Grid columns={3} divided>
+                        <Grid.Column className='div-moons-left'>
+                            <Grid stackable columns={3}  divided>
                                 {this.state.items.map((item) => (
-                                    <Grid.Column key={item.links[0].href}>
-                                        <div style={{
+                                    <Grid.Column  key={item.links[0].href}>
+                                        <div className='slider-image' style={{
                                             backgroundImage: `url('${item.links[0].href}')`,
                                             backgroundSize: 'cover',
                                             backgroundPosition: 'center center',
-                                            width: '200px',
-                                            height: '200px',
+                                            border: '2px solid white',
+                                            width: '250px',
+                                            height: '250px',
                                             margin: '0 auto'
                                         }} onClick={() => this.handleActiveId(item.data[0].nasa_id)} >
                                         </div>
@@ -85,15 +90,18 @@ class App extends React.Component {
 
                             </Grid>
                         </Grid.Column>
-                        <Grid.Column>
+                        <Grid.Column className='moon-info'>
                             <MoonTable moons={this.state.items.filter(item => item.data[0].nasa_id === this.state.activeMoon)}/>
                         </Grid.Column>
                     </Grid.Row>
 
                 </Grid>
+                <SpaceVideo/>
                 {this.state.images.length === galleryImages.length &&
                 <Fade images={this.state.images.map((item)=>item.links[0].href)}/>
                 }
+                <Footer/>
+
             </div>
         );
     }
